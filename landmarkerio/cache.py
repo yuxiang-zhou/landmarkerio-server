@@ -255,7 +255,9 @@ def cache_assets(mode, identifier_f, asset_dir, cache_dir, recursive=False,
         cache_builder = build_image_parallel_cache
     elif mode == 'mesh':
         cache_builder = build_mesh_parallel_cache
+    elif mode == 'model':
+        cache_builder = build_mesh_parallel_cache
     else:
-        raise ValueError("mode must be 'image' or 'mesh'")
+        raise ValueError("mode must be 'image' or 'mesh' or 'model'")
     return cache_builder(identifier_f, asset_dir, cache_dir,
                          recursive=recursive, ext=ext, glob=glob)

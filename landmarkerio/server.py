@@ -31,6 +31,7 @@ image_file = partial(safe_send_file, Mimetype.jpeg)
 json_file = partial(safe_send_file, Mimetype.json)
 gzip_json_file = partial(safe_send_file, Mimetype.json, gzip=True)
 binary_file = partial(safe_send_file, Mimetype.binary)
+text_file = partial(safe_send_file, Mimetype.text)
 gzip_binary_file = partial(binary_file, gzip=True)
 
 
@@ -122,8 +123,8 @@ def lmio_api(dev=False, username=None, password=None):
 
 def add_mode_endpoint(api, mode):
 
-    if mode not in ['image', 'mesh']:
-        raise ValueError("Mode can only be 'image' or 'mesh', "
+    if mode not in ['image', 'mesh', 'model']:
+        raise ValueError("Mode can only be 'image' or 'mesh' or 'model', "
                          "not {}".format(mode))
 
     class Mode(Resource):
@@ -287,3 +288,18 @@ def add_mesh_endpoints(api, adapter):
 
     api.add_resource(MeshList, mesh_url())
     api.add_resource(Mesh, mesh_asset_url())
+
+
+def add_expression_endpoint(api, adapter):
+
+    class Expression(Resource):
+
+        def get(self, asset_id):
+            err = "{} is not an available expression file".format(asset_id)
+            lines = text_file(adapter.exp(asset_id), err)
+            return lines
+
+    exp_url = partial(url, Endpoints.expressions)
+    exp_asset_url = asset(exp_url)
+
+    api.add_resource(Expression, exp_asset_url())

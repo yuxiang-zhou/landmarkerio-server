@@ -9,7 +9,7 @@ if __name__ == "__main__":
         description=r"""
         Cache assets ready for serving to landmarker.io.
         """)
-    parser.add_argument("mode", help="'image' or 'mesh'")
+    parser.add_argument("mode", help="'image' or 'mesh' or 'model'")
     parser.add_argument("path", help="path that will be searched for assets")
     parser.add_argument("cache",
                         help="The directory used to cache assets for serving")

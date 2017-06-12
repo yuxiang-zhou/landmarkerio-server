@@ -78,3 +78,18 @@ class MeshCacheAdapter(CacheAdapter, MeshAdapter):
 
     def asset_ids(self):
         return self._mesh_asset_ids
+
+
+class ModelCacheAdapter(MeshCacheAdapter):
+
+    def __init__(self, cache_dir):
+        super(ModelCacheAdapter, self).__init__(cache_dir)
+
+        self._exp_asset_ids = [a.name
+                                for a in self.cache_dir.glob('*-exp.txt')]
+
+        print(self._exp_asset_ids)
+
+    def exp(self, exp_id):
+        url = reduce(safe_join, (str(self.cache_dir), exp_id + '-exp.txt'))
+        return url

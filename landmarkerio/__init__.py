@@ -14,15 +14,17 @@ class CacheFile(object):
 
 
 class Server(object):
-    allowed_origins = ['https://www.landmarker.io',      # secure client
-                       'http://localhost:4000',          # client development
-                       'http://insecure.landmarker.io']  # legacy client
+    allowed_origins = [
+        'http://localhost:8080',
+        'http://potoo02:8080',
+    ]  # legacy client
     endpoint = '/api/v2/'
 
 
 class Endpoints(object):
     mode = 'mode'
     images = 'images'
+    expressions = 'exp'
     collections = 'collections'
     landmarks = 'landmarks'
     meshes = 'meshes'
@@ -39,6 +41,7 @@ class Mimetype(object):
     json = 'application/json'
     jpeg = 'image/jpeg'
     binary = 'application/octet-stream'
+    text = 'text/plain'
 
 LM_DIRNAME = 'lmiolandmarks'
 TEMPLATE_DINAME = '.lmiotemplates'

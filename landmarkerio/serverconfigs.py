@@ -1,11 +1,12 @@
 from landmarkerio.server import (lmio_api, add_mode_endpoint, add_lm_endpoints,
                                  add_image_endpoints, add_mesh_endpoints,
                                  add_template_endpoints,
-                                 add_collection_endpoints)
+                                 add_collection_endpoints,
+                                 add_expression_endpoint)
 from landmarkerio.template import CachedFileTemplateAdapter
 from landmarkerio.collection import (AllCacheCollectionAdapter,
                                      FileCollectionAdapter)
-from landmarkerio.asset import ImageCacheAdapter, MeshCacheAdapter
+from landmarkerio.asset import ImageCacheAdapter, MeshCacheAdapter, ModelCacheAdapter
 
 from landmarkerio import Server
 
@@ -44,8 +45,13 @@ def serve_from_cache(mode, cache_dir, lm_adapter, template_dir=None,
     elif mode == 'mesh':
         n_dims = 3
         add_mesh_endpoints(api, MeshCacheAdapter(cache_dir))
+    elif mode == 'model':
+        n_dims = 3
+        model_adapter = ModelCacheAdapter(cache_dir)
+        add_mesh_endpoints(api, model_adapter)
+        add_expression_endpoint(api, model_adapter)
     else:
-        raise ValueError("mode must be 'image' or 'mesh'")
+        raise ValueError("mode must be 'image' or 'mesh' or 'model'")
     add_mode_endpoint(api, mode)
     template_adapter = CachedFileTemplateAdapter(
         n_dims, template_dir=template_dir, upgrade_templates=upgrade_templates)
