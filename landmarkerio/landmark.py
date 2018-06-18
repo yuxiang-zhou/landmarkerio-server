@@ -56,6 +56,7 @@ class FileLmAdapter(LmAdapter):
         r"""
         Persist a given landmark definition to disk.
         """
+
         fp = self.lm_fp(asset_id, lm_id)
         with open(fp, 'wb') as f:
             json.dump(lm_json, f, sort_keys=True, indent=4,

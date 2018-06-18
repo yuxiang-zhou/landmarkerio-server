@@ -15,6 +15,9 @@ class CacheFile(object):
 
 class Server(object):
     allowed_origins = [
+        'https://www.landmarker.io',      # secure client
+        'http://localhost:4000',          # client development
+        'http://insecure.landmarker.io',
         'http://localhost:8080',
         'http://potoo02:8080',
     ]  # legacy client

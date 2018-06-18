@@ -169,7 +169,7 @@ def add_lm_endpoints(api, lm_adapter, template_adapter):
             try:
                 return lm_adapter.save_lm(asset_id, lm_id, request.json)
             except Exception as e:
-                print(e)
+                print('Error: {}'.format(e))
                 return abort(409, message="{}:{} unable to "
                                           "save".format(asset_id, lm_id))
 
