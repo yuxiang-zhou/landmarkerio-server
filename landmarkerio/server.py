@@ -123,8 +123,8 @@ def lmio_api(dev=False, username=None, password=None):
 
 def add_mode_endpoint(api, mode):
 
-    if mode not in ['image', 'mesh', 'model']:
-        raise ValueError("Mode can only be 'image' or 'mesh' or 'model', "
+    if mode not in ['image', 'mesh', 'model', 'select']:
+        raise ValueError("Mode can only be 'image' or 'mesh' or 'model' or 'select', "
                          "not {}".format(mode))
 
     class Mode(Resource):

@@ -42,6 +42,8 @@ def serve_from_cache(mode, cache_dir, lm_adapter, template_dir=None,
     add_image_endpoints(api, ImageCacheAdapter(cache_dir))
     if mode == 'image':
         n_dims = 2
+    elif mode == 'select':
+        n_dims = 2
     elif mode == 'mesh':
         n_dims = 3
         add_mesh_endpoints(api, MeshCacheAdapter(cache_dir))
@@ -51,7 +53,7 @@ def serve_from_cache(mode, cache_dir, lm_adapter, template_dir=None,
         add_mesh_endpoints(api, model_adapter)
         add_expression_endpoint(api, model_adapter)
     else:
-        raise ValueError("mode must be 'image' or 'mesh' or 'model'")
+        raise ValueError("mode must be 'image' or 'mesh' or 'model' or 'select'")
     add_mode_endpoint(api, mode)
     template_adapter = CachedFileTemplateAdapter(
         n_dims, template_dir=template_dir, upgrade_templates=upgrade_templates)

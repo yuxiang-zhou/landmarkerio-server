@@ -38,7 +38,7 @@ if __name__ == "__main__":
         description=r"""
         Serve landmarks and assets for landmarker.io through Menpo.
         """)
-    parser.add_argument("mode", help="'image' or 'mesh' or 'model'")
+    parser.add_argument("mode", help="'image' or 'mesh' or 'model' or 'select'")
     parser.add_argument("path", help="path that will be searched for assets")
     parser.add_argument("-r", "--recursive", action='store_true',
                         help="If provided the path is searched recursively for"
